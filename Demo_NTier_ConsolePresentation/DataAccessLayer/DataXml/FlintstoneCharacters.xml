@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Source: https://tvtropes.org/pmwiki/pmwiki.php/Characters/TheFlintstones
+-->
+<ArrayOfFlintstoneCharacter>
+  <FlintstoneCharacter>
+    <Id>1</Id>
+    <FirstName>Fred</FirstName>
+    <LastName>Flintstone</LastName>
+    <Age>28</Age>
+    <Gender>Male</Gender>
+    <ImageFileName>fred_flintstone.jpg</ImageFileName>
+    <AverageAnnualGross>45000</AverageAnnualGross>
+    <Description>Fred is the main character of the series. He's an accident-prone bronto-crane operator at the Slate Rock and Gravel Company and the head of the Flintstone household. He is quick to anger (usually over trivial matters), but is nonetheless a very loving husband and father. He's also good at bowling and is a member of the fictional "Loyal Order of Water Buffaloes" (Lodge No. 26), a men-only club paralleling real-life fraternities such as the Loyal Order of Moose.</Description>
+    <GroceryList>
+      <GroceryItem>
+        <Name>Apples</Name>
+        <Quantity>4</Quantity>
+      </GroceryItem>
+      <GroceryItem>
+        <Name>Oranges</Name>
+        <Quantity>5</Quantity>
+      </GroceryItem>
+      <GroceryItem>
+        <Name>Bananas</Name>
+        <Quantity>1</Quantity>
+      </GroceryItem>
+    </GroceryList>
+  </FlintstoneCharacter>
+  <FlintstoneCharacter>
+    <Id>2</Id>
+    <FirstName>Wilma</FirstName>
+    <LastName>Flintstone</LastName>
+    <Age>28</Age>
+    <Gender>Female</Gender>
+    <ImageFileName>wilma_flintstone.jpg</ImageFileName>
+    <AverageAnnualGross>60000</AverageAnnualGross>
+    <Description>Wilma is Fred's wife. She is more intelligent and level-headed than her husband, though she often has a habit of spending money recklessly (with Betty and her catchphrase being "Da-da-da duh da-da CHARGE IT!!"). She's often a foil to Fred's poor behavior.</Description>
+  </FlintstoneCharacter>
+  <FlintstoneCharacter>
+    <Id>3</Id>
+    <FirstName>Pebbles</FirstName>
+    <LastName>Flintstone</LastName>
+    <Age>1</Age>
+    <Gender>Female</Gender>
+    <ImageFileName>pebbles_flintstone.jpg</ImageFileName>
+    <AverageAnnualGross>5000</AverageAnnualGross>
+    <Description>Pebbles is the Flintstones' infant daughter, who is born near the end of the third season.</Description>
+    <GroceryList>
+      <GroceryItem>
+        <Name>Bread</Name>
+        <Quantity>1</Quantity>
+      </GroceryItem>
+      <GroceryItem>
+        <Name>Milk</Name>
+        <Quantity>2</Quantity>
+      </GroceryItem>
+      <GroceryItem>
+        <Name>Butter</Name>
+        <Quantity>1</Quantity>
+      </GroceryItem>
+    </GroceryList>
+  </FlintstoneCharacter>
+  <FlintstoneCharacter>
+    <Id>4</Id>
+    <FirstName>Barney</FirstName>
+    <LastName>Rubble</LastName>
+    <Age>27</Age>
+    <Gender>Male</Gender>
+    <ImageFileName>barney_rubble.jpg</ImageFileName>
+    <AverageAnnualGross>30000</AverageAnnualGross>
+    <Description>Barney is the secondary main character and Fred's best friend and next-door neighbor. His occupation is, for the most part of the series, unknown, though later series depict him working in the same quarry as Fred. He shares many of Fred's interests such as bowling and golf, and is also a member of the "Loyal Order of Water Buffaloes". Though Fred and Barney frequently get into feuds with one another (usually due to Fred's short temper), their deep fraternal bond remains evident.</Description>
+  </FlintstoneCharacter>
+  <FlintstoneCharacter>
+    <Id>5</Id>
+    <FirstName>Betty</FirstName>
+    <LastName>Rubble</LastName>
+    <Age>26</Age>
+    <Gender>Male</Gender>
+    <ImageFileName>betty_rubble.gif</ImageFileName>
+    <AverageAnnualGross>30000</AverageAnnualGross>
+    <Description>Betty is Barney's wife and Wilma's best friend. Like Wilma, she, too, has a habit of carelessly spending money.</Description>
+  </FlintstoneCharacter>
+  <FlintstoneCharacter>
+    <Id>6</Id>
+    <FirstName>Bamm-Bamm</FirstName>
+    <LastName>Rubble</LastName>
+    <Age>2</Age>
+    <Gender>Male</Gender>
+    <ImageFileName>bamm_bamm_rubble.gif</ImageFileName>
+    <AverageAnnualGross>5000</AverageAnnualGross>
+    <Description>Bamm-Bamm is the Rubbles' abnormally strong adopted son, whom they adopt during the fourth season.</Description>
+  </FlintstoneCharacter>
+  <FlintstoneCharacter>
+    <Id>7</Id>
+    <FirstName>Dino</FirstName>
+    <LastName></LastName>
+    <Age>7</Age>
+    <Gender>Female</Gender>
+    <ImageFileName>dino.jpg</ImageFileName>
+    <AverageAnnualGross>1000000</AverageAnnualGross>
+    <Description>Dino, a prosauropod dinosaur, is the Flintstones' pet that barks and generally acts like a dog. A running gag in the series involves Dino knocking down Fred out of excitement and licking him repeatedly. Though this irritates Fred a lot, he generally likes Dino very much.</Description>
+  </FlintstoneCharacter>
+</ArrayOfFlintstoneCharacter>

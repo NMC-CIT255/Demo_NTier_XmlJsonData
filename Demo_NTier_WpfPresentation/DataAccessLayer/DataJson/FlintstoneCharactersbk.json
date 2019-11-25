@@ -1,0 +1,72 @@
+{
+  "Characters": [
+    {
+      "Id": 1,
+      "FirstName": "Fred",
+      "LastName": "Flintstone",
+      "Age": 28,
+      "Gender": 1,
+      "ImageFileName": "fred_flintstone.jpg",
+      "Description": "Fred is the main character of the series. He's an accident-prone bronto-crane operator at the Slate Rock and Gravel Company and the head of the Flintstone household. He is quick to anger (usually over trivial matters), but is nonetheless a very loving husband and father. He's also good at bowling and is a member of the fictional 'Loyal Order of Water Buffaloes' (Lodge No. 26), a men-only club paralleling real-life fraternities such as the Loyal Order of Moose.",
+      "HireDate": "0001-01-01T00:00:00",
+      "AverageAnnualGross": 45000,
+      "FullName": "Fred Flintstone",
+      "ImageFilePath": null,
+      "GroceryList": [
+        {
+          "Name": "Apples",
+          "Quantity": 20
+        },
+        {
+          "Name": "Oranges",
+          "Quantity": 13
+        },
+        {
+          "Name": "Bananas",
+          "Quantity": 2
+        }
+      ]
+    },
+    {
+      "Id": 3,
+      "FirstName": "Wilma",
+      "LastName": "Flintstone",
+      "Age": 28,
+      "Gender": 2,
+      "ImageFileName": "wilma_flintstone.jpg",
+      "Description": "Wilma is Fred's wife. She is more intelligent and level-headed than her husband, though she often has a habit of spending money recklessly (with Betty and her catchphrase being 'Da-da-da duh da-da CHARGE IT!!'). She's often a foil to Fred's poor behavior.",
+      "HireDate": "0001-01-01T00:00:00",
+      "AverageAnnualGross": 60000,
+      "FullName": "Wilma Flintstone",
+      "ImageFilePath": null,
+      "GroceryList": [
+        {
+          "Name": "Bread",
+          "Quantity": 2
+        },
+        {
+          "Name": "Milk",
+          "Quantity": 1
+        },
+        {
+          "Name": "Butter",
+          "Quantity": 2
+        }
+      ]
+    },
+    {
+      "Id": 4,
+      "FirstName": "Pebbles",
+      "LastName": "Flintstone",
+      "Age": 1,
+      "Gender": 2,
+      "ImageFileName": "Pebbles_Flintstone.jpg",
+      "Description": "Pebbles is the Flintstones' infant daughter, who is born near the end of the third season.",
+      "HireDate": "0001-01-01T00:00:00",
+      "AverageAnnualGross": 0.0,
+      "FullName": "Pebbles Flintstone",
+      "ImageFilePath": null,
+      "GroceryList": []
+    }
+  ]
+}

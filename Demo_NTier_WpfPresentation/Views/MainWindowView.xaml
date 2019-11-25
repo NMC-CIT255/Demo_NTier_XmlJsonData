@@ -78,7 +78,7 @@
                         x:Name="Button_Quit" 
                         Width="100"
                         Height="40"
-                        Margin="400,20,0,0"
+                        Margin="440,20,0,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"           
                         FontSize="20"

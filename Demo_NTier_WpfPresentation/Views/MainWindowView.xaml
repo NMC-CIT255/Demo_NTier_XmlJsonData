@@ -246,7 +246,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Hire Date: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding DetailedViewCharacter.HireDate, StringFormat='Hire Date: \{0:MM/dd/yyyy\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding DetailedViewCharacter.HireDate, StringFormat='\{0:MM/dd/yyyy\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Average Annual Gross: " Style="{StaticResource DetailLabelStyle}"/>

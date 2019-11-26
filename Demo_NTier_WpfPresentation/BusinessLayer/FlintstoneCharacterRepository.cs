@@ -80,6 +80,7 @@ namespace Demo_NTier_XmlJsonData.BusinessLayer
         {
             try
             {
+                character.Id = NextId();
                 _characters.Add(character);
                 _dataService.WriteAll(_characters);
             }
@@ -124,6 +125,18 @@ namespace Demo_NTier_XmlJsonData.BusinessLayer
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// get the next id value
+        /// </summary>
+        /// <returns>next id value</returns>
+        private int NextId()
+        {
+            //
+            // get maximum id number and return incremented value
+            //
+            return ++_characters.OrderByDescending(c => c.Id).First().Id;
         }
 
         /// <summary>

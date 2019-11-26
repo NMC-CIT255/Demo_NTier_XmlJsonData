@@ -49,10 +49,6 @@ namespace Demo_NTier_XmlJsonData.DataAccessLayer
         /// <param name="characters">list of characters</param>
         public void WriteAll(IEnumerable<FlintstoneCharacter> characters)
         {
-            //RootObject rootObject = new RootObject();
-            //rootObject.Characters = new FlintstoneCharacter();
-            //rootObject.Characters.Character = characters as List<CharFlintstoneCharacteracter>;
-
             string jsonString = JsonConvert.SerializeObject(characters, Formatting.Indented);
 
             try

@@ -239,6 +239,13 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
                     if (characterToUpdate != null)
                     {
+                        //
+                        // update character in persistence
+                        //
+                        _fcBusiness.UpdateFlintstoneCharacter(DetailedViewCharacter);
+
+                        //
+                        // update character in list - update view
                         _characters.Remove(characterToUpdate);
                         _characters.Add(DetailedViewCharacter);
                     }
@@ -264,6 +271,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         private void UpdateDetailedViewCharacterToSelected()
         {
             _detailedViewCharacter = new FlintstoneCharacter();
+            _detailedViewCharacter.Id = _selectedCharacter.Id;
             _detailedViewCharacter.FirstName = _selectedCharacter.FirstName;
             _detailedViewCharacter.LastName = _selectedCharacter.LastName;
             _detailedViewCharacter.Age = _selectedCharacter.Age;

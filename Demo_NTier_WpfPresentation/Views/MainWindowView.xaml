@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Demo_NTier_WpfPresentation"
         xmlns:viewModels="clr-namespace:Demo_NTier_WpfPresentation.ViewModels"
+        xmlns:local1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
         Title="Talent Agency Software, Inc." 
         Height="500" 
@@ -64,6 +65,7 @@
             </Style.Triggers>
         </Style>
         <local:NullToDateConverter x:Key="DateConverter"/>
+        <local1:BooleanToVisibilityConverter x:Key="myBoolToVisibilityConverter" />
     </Window.Resources>
 
     <!--<Window.DataContext>
@@ -98,8 +100,8 @@
         <Grid 
             Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="59*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="60*"/>
                 <!--<ColumnDefinition Width="41*"/>-->
             </Grid.ColumnDefinitions>
             <StackPanel
@@ -110,20 +112,21 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel
                         Grid.Column="0"
                         Margin="20,0,0,0"
-                        Orientation="Vertical">
+                        Orientation="Horizontal">
                         <Label Content="Sort By:" Style="{StaticResource MasterLabelTextStyle}"/>
                         <RadioButton 
                             Name="RadioButton_LastNameSort"
+                            Margin="20,0,0,0"
                             Content="Last Name"
                             Style="{StaticResource RadioButtonStyle}"
                             IsChecked="True"/>
                         <RadioButton 
                             Name="RadioButton_AgeSort"
+                            Margin="20,0,0,0"
                             Content="Age"
                             Style="{StaticResource RadioButtonStyle}"/>
                     </StackPanel>
@@ -171,9 +174,19 @@
                                             </StackPanel>
                                         <StackPanel
                                             Orientation="Horizontal">
-                                                <Button 
+                                            <Button 
+                                                        x:Name="Button_View" 
+                                                        Width="40"
+                                                        Height="20"
+                                                        Margin="3"
+                                                        VerticalAlignment="Center"           
+                                                        FontSize="10"
+                                                        Content="View"
+                                                        Style="{StaticResource ButtonStyleSmall}"
+                                                        Command="{Binding Path=DataContext.ViewCharacterCommand, ElementName=ListWindow}" />
+                                            <Button 
                                                         x:Name="Button_Delete" 
-                                                        Width="80"
+                                                        Width="40"
                                                         Height="20"
                                                         Margin="3"
                                                         VerticalAlignment="Center"           
@@ -183,7 +196,7 @@
                                                         Command="{Binding Path=DataContext.DeleteCharacterCommand, ElementName=ListWindow}" />
                                                 <Button 
                                                         x:Name="Button_Edit" 
-                                                        Width="80"
+                                                        Width="40"
                                                         Height="20"
                                                         Margin="3"
                                                         VerticalAlignment="Center"           
@@ -210,34 +223,34 @@
                     <Image 
                     Grid.Column="0"
                     Height="200"
-                    Source="{Binding EditingCharacter.ImageFilePath}"/>
+                    Source="{Binding DetailedViewCharacter.ImageFilePath}"/>
                     <StackPanel
                     Grid.Column="1"
                     Margin="10,10,10,10"
                     Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="First Name: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding EditingCharacter.FirstName}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding DetailedViewCharacter.FirstName}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Last Name: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding EditingCharacter.LastName}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding DetailedViewCharacter.LastName}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Age: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding EditingCharacter.Age}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding DetailedViewCharacter.Age}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Gender: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding EditingCharacter.Gender}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding DetailedViewCharacter.Gender}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Hire Date: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding EditingCharacter.HireDate, StringFormat='Hire Date: \{0:MM/dd/yyyy\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding DetailedViewCharacter.HireDate, StringFormat='Hire Date: \{0:MM/dd/yyyy\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Average Annual Gross: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding EditingCharacter.AverageAnnualGross, StringFormat='\{0:c\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding DetailedViewCharacter.AverageAnnualGross, StringFormat='\{0:c\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <Label Content="Description: " Style="{StaticResource DetailLabelStyle}"/>
@@ -249,7 +262,7 @@
                             AcceptsReturn="True"
                             VerticalContentAlignment="Top"
                             VerticalScrollBarVisibility="Visible"
-                            Text="{Binding EditingCharacter.Description}" 
+                            Text="{Binding DetailedViewCharacter.Description}" 
                             Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                     </StackPanel>
@@ -259,25 +272,27 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
                     <Button 
-                        x:Name="Button_Edit" 
+                        x:Name="Button_Save" 
                         Width="100"
                         Height="40"
                         Margin="10,10,10,10"
                         VerticalAlignment="Center"           
                         FontSize="20"
-                        Content="Edit"
+                        Content="Save"
                         Style="{StaticResource ButtonStyleLarge}"
-                        Command="{Binding Path=EditCharacterCommand}"/>
+                        Visibility="{Binding IsEditingAdding, Converter={StaticResource myBoolToVisibilityConverter}}"
+                        Command="{Binding Path=SaveCharacterCommand}"/>
                     <Button 
-                        x:Name="Button_Delete" 
+                        x:Name="Button_Cancel" 
                         Width="100"
                         Height="40"
                         Margin="10,10,10,10"
                         VerticalAlignment="Center"           
                         FontSize="20"
-                        Content="Delete"
+                        Content="Cancel"
                         Style="{StaticResource ButtonStyleLarge}"
-                        Command="{Binding Path=DeleteCharacterCommand}"/>
+                        Visibility="{Binding IsEditingAdding, Converter={StaticResource myBoolToVisibilityConverter}}"
+                        Command="{Binding Path=CancelCharacterCommand}"/>
                 </StackPanel>
             </StackPanel>
 

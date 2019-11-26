@@ -16,6 +16,15 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
+        private enum OperationStatus
+        {
+            NONE,
+            VIEW,
+            ADD,
+            EDIT,
+            DELETE
+        }
+
         #region COMMANDS
 
         public ICommand DeleteCharacterCommand
@@ -26,6 +35,21 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         public ICommand EditCharacterCommand
         {
             get { return new DelegateCommand(OnEditCharacter); }
+        }
+
+        public ICommand SaveCharacterCommand
+        {
+            get { return new DelegateCommand(OnSaveCharacter); }
+        }
+
+        public ICommand CancelCharacterCommand
+        {
+            get { return new DelegateCommand(OnCancelCharacter); }
+        }
+
+        public ICommand ViewCharacterCommand
+        {
+            get { return new DelegateCommand(OnViewCharacter); }
         }
 
         public ICommand QuitApplicationCommand
@@ -50,8 +74,11 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
         private ObservableCollection<FlintstoneCharacter> _characters;
         private FlintstoneCharacter _selectedCharacter;
-        private FlintstoneCharacter _editingCharacter;
+        private FlintstoneCharacter _detailedViewCharacter;
         private FlintstoneCharacterBusiness _fcBusiness;
+        private OperationStatus _operationStatus = OperationStatus.NONE;
+
+        private bool _isEditingAdding = false;
 
         #endregion
 
@@ -63,17 +90,17 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             set { _characters = value; }
         }
 
-        public FlintstoneCharacter EditingCharacter
+        public FlintstoneCharacter DetailedViewCharacter
         {
-            get { return _editingCharacter; }
+            get { return _detailedViewCharacter; }
             set
             {
-                if (_editingCharacter == value)
+                if (_detailedViewCharacter == value)
                 {
                     return;
                 }
-                _selectedCharacter = value;
-                OnPropertyChanged("EditingCharacter");
+                _detailedViewCharacter = value;
+                OnPropertyChanged("DetailedViewCharacter");
             }
         }
 
@@ -88,6 +115,16 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                 }
                 _selectedCharacter = value;
                 OnPropertyChanged("SelectedCharacter");
+            }
+        }
+
+        public bool IsEditingAdding
+        {
+            get { return _isEditingAdding; }
+            set
+            {
+                _isEditingAdding = value;
+                OnPropertyChanged(nameof(IsEditingAdding));
             }
         }
 
@@ -135,14 +172,84 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             }
         }
 
+        private void UpdateDetailedViewCharacterToSelected()
+        {
+            _detailedViewCharacter = new FlintstoneCharacter();
+            _detailedViewCharacter.FirstName = _selectedCharacter.FirstName;
+            _detailedViewCharacter.LastName = _selectedCharacter.LastName;
+            _detailedViewCharacter.Age = _selectedCharacter.Age;
+            _detailedViewCharacter.Gender = _selectedCharacter.Gender;
+            _detailedViewCharacter.AverageAnnualGross = _selectedCharacter.AverageAnnualGross;
+            _detailedViewCharacter.HireDate = _selectedCharacter.HireDate;
+            _detailedViewCharacter.Description = _selectedCharacter.Description;
+            _detailedViewCharacter.ImageFileName = _selectedCharacter.ImageFileName;
+            _detailedViewCharacter.ImageFilePath = _selectedCharacter.ImageFilePath;
+            OnPropertyChanged("DetailedViewCharacter");
+        }
+
+        private void ResetDetailedViewCharacter()
+        {
+            _detailedViewCharacter = new FlintstoneCharacter();
+            _detailedViewCharacter.FirstName = "";
+            _detailedViewCharacter.LastName = "";
+            _detailedViewCharacter.Age = 0;
+            _detailedViewCharacter.Gender = FlintstoneCharacter.GenderType.None;
+            _detailedViewCharacter.AverageAnnualGross = 0;
+            _detailedViewCharacter.HireDate = DateTime.Today;
+            _detailedViewCharacter.Description = "";
+            _detailedViewCharacter.ImageFileName = "";
+            _detailedViewCharacter.ImageFilePath = "";
+            OnPropertyChanged("DetailedViewCharacter");
+        }
+
         private void OnEditCharacter()
         {
             if (_selectedCharacter != null)
             {
-                _editingCharacter = new FlintstoneCharacter();
-                _editingCharacter.FirstName = _selectedCharacter.FirstName;
-                OnPropertyChanged("EditingCharacter");
+                _operationStatus = OperationStatus.EDIT;
+                IsEditingAdding = true;
+                UpdateDetailedViewCharacterToSelected();
             }
+        }
+
+        private void OnViewCharacter()
+        {
+            if (_selectedCharacter != null)
+            {
+                _operationStatus = OperationStatus.VIEW;
+                UpdateDetailedViewCharacterToSelected();
+            }
+        }
+
+        private void OnSaveCharacter()
+        {
+            switch (_operationStatus)
+            {
+                case OperationStatus.ADD:
+                    break;
+                case OperationStatus.EDIT:
+                    FlintstoneCharacter characterToUpdate = _characters.FirstOrDefault(c => c.Id == SelectedCharacter.Id);
+
+                    if (characterToUpdate != null)
+                    {
+                        _characters.Remove(characterToUpdate);
+                        _characters.Add(DetailedViewCharacter);
+
+                        ResetDetailedViewCharacter();
+                        IsEditingAdding = false;
+                        _operationStatus = OperationStatus.NONE;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void OnCancelCharacter()
+        {
+            ResetDetailedViewCharacter();
+            _operationStatus = OperationStatus.NONE;
+            IsEditingAdding = false;
         }
 
         private void OnQuitApplication()

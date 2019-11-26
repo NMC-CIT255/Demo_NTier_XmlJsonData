@@ -45,7 +45,16 @@
             <Setter Property="Foreground" Value="DarkGoldenrod"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <Style x:Key="ButtonStyleLarge" TargetType="Button">
+            <Setter Property="Background" Value="DarkGoldenrod"/>
+            <Setter Property="Foreground" Value="AntiqueWhite"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyleSmall" TargetType="Button">
             <Setter Property="Background" Value="DarkGoldenrod"/>
             <Setter Property="Foreground" Value="AntiqueWhite"/>
             <Style.Triggers>
@@ -83,7 +92,7 @@
                         VerticalAlignment="Top"           
                         FontSize="20"
                         Content="Quit"
-                        Style="{StaticResource ButtonStyle}"
+                        Style="{StaticResource ButtonStyleLarge}"
                         Command="{Binding Path=QuitApplicationCommand}"/>
         </StackPanel>
         <Grid 
@@ -91,7 +100,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="59*"/>
-                <ColumnDefinition Width="41*"/>
+                <!--<ColumnDefinition Width="41*"/>-->
             </Grid.ColumnDefinitions>
             <StackPanel
                 Grid.Column="0"
@@ -143,18 +152,47 @@
                                         Width="40" 
                                         Height="40" />
                                     </Border>
-                                    <Label
-                                    Content="{Binding FullName}"
-                                    Width="150"
-                                    Style="{StaticResource MasterLabelTextStyle}"/>
-                                    <Label
-                                    Content="{Binding Age }"
-                                    Padding="0,5"
-                                    Style="{StaticResource MasterLabelTextStyle}"/>
-                                    <Label
-                                    Content=" yrs"
-                                    Padding="0,5"
-                                    Style="{StaticResource MasterLabelTextStyle}"/>
+                                    <StackPanel
+                                        Orientation="Vertical">
+                                        <StackPanel
+                                            Orientation="Horizontal">
+                                                <Label
+                                                Content="{Binding FullName}"
+                                                Width="120"
+                                                Style="{StaticResource MasterLabelTextStyle}"/>
+                                                <Label
+                                                Content="{Binding Age }"
+                                                Padding="0,5"
+                                                Style="{StaticResource MasterLabelTextStyle}"/>
+                                                <Label
+                                                Content=" yrs"
+                                                Padding="0,5"
+                                                Style="{StaticResource MasterLabelTextStyle}"/>
+                                            </StackPanel>
+                                        <StackPanel
+                                            Orientation="Horizontal">
+                                                <Button 
+                                                        x:Name="Button_Delete" 
+                                                        Width="80"
+                                                        Height="20"
+                                                        Margin="3"
+                                                        VerticalAlignment="Center"           
+                                                        FontSize="10"
+                                                        Content="Delete"
+                                                        Style="{StaticResource ButtonStyleSmall}"
+                                                        Command="{Binding Path=DataContext.DeleteCharacterCommand, ElementName=ListWindow}" />
+                                                <Button 
+                                                        x:Name="Button_Edit" 
+                                                        Width="80"
+                                                        Height="20"
+                                                        Margin="3"
+                                                        VerticalAlignment="Center"           
+                                                        FontSize="10"
+                                                        Content="Edit"
+                                                        Style="{StaticResource ButtonStyleSmall}"
+                                                        Command="{Binding Path=DataContext.EditCharacterCommand, ElementName=ListWindow}" />
+                                        </StackPanel>
+                                    </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -166,40 +204,40 @@
                 Orientation="Vertical" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <Image 
                     Grid.Column="0"
                     Height="200"
-                    Source="{Binding SelectedCharacter.ImageFilePath}"/>
+                    Source="{Binding EditingCharacter.ImageFilePath}"/>
                     <StackPanel
                     Grid.Column="1"
                     Margin="10,10,10,10"
                     Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="First Name: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding SelectedCharacter.FirstName}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding EditingCharacter.FirstName}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Last Name: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding SelectedCharacter.LastName}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding EditingCharacter.LastName}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Age: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding SelectedCharacter.Age}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding EditingCharacter.Age}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Gender: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding SelectedCharacter.Gender}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding EditingCharacter.Gender}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Hire Date: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding SelectedCharacter.HireDate, StringFormat='Hire Date: \{0:MM/dd/yyyy\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding EditingCharacter.HireDate, StringFormat='Hire Date: \{0:MM/dd/yyyy\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Average Annual Gross: " Style="{StaticResource DetailLabelStyle}"/>
-                            <TextBox Text="{Binding SelectedCharacter.AverageAnnualGross, StringFormat='\{0:c\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
+                            <TextBox Text="{Binding EditingCharacter.AverageAnnualGross, StringFormat='\{0:c\}'}" Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <Label Content="Description: " Style="{StaticResource DetailLabelStyle}"/>
@@ -211,7 +249,7 @@
                             AcceptsReturn="True"
                             VerticalContentAlignment="Top"
                             VerticalScrollBarVisibility="Visible"
-                            Text="{Binding SelectedCharacter.Description}" 
+                            Text="{Binding EditingCharacter.Description}" 
                             Style="{StaticResource DetailTextBoxStyle}"/>
                         </StackPanel>
                     </StackPanel>
@@ -228,7 +266,7 @@
                         VerticalAlignment="Center"           
                         FontSize="20"
                         Content="Edit"
-                        Style="{StaticResource ButtonStyle}"
+                        Style="{StaticResource ButtonStyleLarge}"
                         Command="{Binding Path=EditCharacterCommand}"/>
                     <Button 
                         x:Name="Button_Delete" 
@@ -238,7 +276,7 @@
                         VerticalAlignment="Center"           
                         FontSize="20"
                         Content="Delete"
-                        Style="{StaticResource ButtonStyle}"
+                        Style="{StaticResource ButtonStyleLarge}"
                         Command="{Binding Path=DeleteCharacterCommand}"/>
                 </StackPanel>
             </StackPanel>

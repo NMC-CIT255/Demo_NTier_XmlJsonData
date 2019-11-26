@@ -42,6 +42,11 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             get { return new DelegateCommand(OnSaveCharacter); }
         }
 
+        public ICommand AddCharacterCommand
+        {
+            get { return new DelegateCommand(OnAddCharacter); }
+        }
+
         public ICommand CancelCharacterCommand
         {
             get { return new DelegateCommand(OnCancelCharacter); }
@@ -79,6 +84,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         private OperationStatus _operationStatus = OperationStatus.NONE;
 
         private bool _isEditingAdding = false;
+        private bool _showAddButton = true;
 
         #endregion
 
@@ -128,6 +134,16 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             }
         }
 
+        public bool ShowAddButton
+        {
+            get { return _showAddButton; }
+            set
+            {
+                _showAddButton = value;
+                OnPropertyChanged(nameof(ShowAddButton));
+            }
+        }
+
         #endregion
 
         #region CONSTRUCTORS
@@ -172,6 +188,79 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             }
         }
 
+        private void OnEditCharacter()
+        {
+            if (_selectedCharacter != null)
+            {
+                _operationStatus = OperationStatus.EDIT;
+                IsEditingAdding = true;
+                ShowAddButton = false;
+                UpdateDetailedViewCharacterToSelected();
+            }
+        }
+
+        private void OnViewCharacter()
+        {
+            if (_selectedCharacter != null)
+            {
+                _operationStatus = OperationStatus.VIEW;
+                UpdateDetailedViewCharacterToSelected();
+            }
+        }
+
+        private void OnAddCharacter()
+        {
+            ResetDetailedViewCharacter();
+            IsEditingAdding = true;
+            ShowAddButton = false;
+            _operationStatus = OperationStatus.ADD;
+        }
+
+        private void OnSaveCharacter()
+        {
+            switch (_operationStatus)
+            {
+                case OperationStatus.ADD:
+                    if (_detailedViewCharacter != null)
+                    {
+                        //
+                        // add character to persistence
+                        //
+                        _fcBusiness.AddFlintstoneCharacter(_detailedViewCharacter);
+
+                        //
+                        // add character to list - update view
+                        //
+                        _characters.Add(DetailedViewCharacter);
+                    }
+                    break;
+                case OperationStatus.EDIT:
+                    FlintstoneCharacter characterToUpdate = _characters.FirstOrDefault(c => c.Id == SelectedCharacter.Id);
+
+                    if (characterToUpdate != null)
+                    {
+                        _characters.Remove(characterToUpdate);
+                        _characters.Add(DetailedViewCharacter);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            ResetDetailedViewCharacter();
+            IsEditingAdding = false;
+            ShowAddButton = true;
+            _operationStatus = OperationStatus.NONE;
+        }
+
+        private void OnCancelCharacter()
+        {
+            ResetDetailedViewCharacter();
+            _operationStatus = OperationStatus.NONE;
+            IsEditingAdding = false;
+            ShowAddButton = true;
+        }
+
         private void UpdateDetailedViewCharacterToSelected()
         {
             _detailedViewCharacter = new FlintstoneCharacter();
@@ -200,56 +289,6 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             _detailedViewCharacter.ImageFileName = "";
             _detailedViewCharacter.ImageFilePath = "";
             OnPropertyChanged("DetailedViewCharacter");
-        }
-
-        private void OnEditCharacter()
-        {
-            if (_selectedCharacter != null)
-            {
-                _operationStatus = OperationStatus.EDIT;
-                IsEditingAdding = true;
-                UpdateDetailedViewCharacterToSelected();
-            }
-        }
-
-        private void OnViewCharacter()
-        {
-            if (_selectedCharacter != null)
-            {
-                _operationStatus = OperationStatus.VIEW;
-                UpdateDetailedViewCharacterToSelected();
-            }
-        }
-
-        private void OnSaveCharacter()
-        {
-            switch (_operationStatus)
-            {
-                case OperationStatus.ADD:
-                    break;
-                case OperationStatus.EDIT:
-                    FlintstoneCharacter characterToUpdate = _characters.FirstOrDefault(c => c.Id == SelectedCharacter.Id);
-
-                    if (characterToUpdate != null)
-                    {
-                        _characters.Remove(characterToUpdate);
-                        _characters.Add(DetailedViewCharacter);
-
-                        ResetDetailedViewCharacter();
-                        IsEditingAdding = false;
-                        _operationStatus = OperationStatus.NONE;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void OnCancelCharacter()
-        {
-            ResetDetailedViewCharacter();
-            _operationStatus = OperationStatus.NONE;
-            IsEditingAdding = false;
         }
 
         private void OnQuitApplication()

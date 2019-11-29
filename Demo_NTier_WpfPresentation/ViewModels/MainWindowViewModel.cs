@@ -27,6 +27,16 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
         #region COMMANDS
 
+        public ICommand SortListByAgeCommand
+        {
+            get { return new DelegateCommand(OnSortListByAge); }
+        }
+
+        public ICommand SortCharacterListCommand
+        {
+            get { return new RelayCommand(new Action<object>(OnSortCharacterList)); }
+        }
+
         public ICommand DeleteCharacterCommand
         {
             get { return new DelegateCommand(OnDeleteCharacter); }
@@ -62,10 +72,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             get { return new DelegateCommand(OnQuitApplication); }
         }
 
-        public ICommand SortListByAgeCommand
-        {
-            get { return new DelegateCommand(OnSortListByAge); }
-        }
+
 
         #endregion
 
@@ -86,6 +93,8 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         private bool _isEditingAdding = false;
         private bool _showAddButton = true;
 
+        private string _sortType;
+
         #endregion
 
         #region PROPERTIES
@@ -93,7 +102,11 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         public ObservableCollection<FlintstoneCharacter> Characters
         {
             get { return _characters; }
-            set { _characters = value; }
+            set
+            {
+                _characters = value;
+                OnPropertyChanged(nameof(Characters));
+            }
         }
 
         public FlintstoneCharacter DetailedViewCharacter
@@ -144,6 +157,12 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             }
         }
 
+        public string SortType
+        {
+            get { return _sortType; }
+            set { _sortType = value; }
+        }
+
         #endregion
 
         #region CONSTRUCTORS
@@ -153,6 +172,8 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             _fcBusiness = fcBusiness;
             _characters = new ObservableCollection<FlintstoneCharacter>(fcBusiness.AllFlintstoneCharacters());
             UpdateImagePath();
+
+            //SortCharacterListCommand = new RelayCommand(new Action<object>(OnSortCharacterList));
         }
 
         #endregion
@@ -166,6 +187,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                 character.ImageFilePath = DataConfig.ImagePath + character.ImageFileName;
             }
         }
+
 
         private void OnDeleteCharacter()
         {
@@ -309,7 +331,23 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
         private void OnSortListByAge()
         {
-            _characters = new ObservableCollection<FlintstoneCharacter>(_characters.OrderBy(c => c.Age));
+            Characters = new ObservableCollection<FlintstoneCharacter>(_characters.OrderBy(c => c.Age));
+        }
+
+
+        private void OnSortCharacterList(object obj)
+        {
+            string sortType = obj.ToString();
+            switch (_sortType)
+            {
+                case "Age":
+
+                    break;
+
+                default:
+                    break;
+            }
+            Characters = new ObservableCollection<FlintstoneCharacter>(Characters.OrderBy(c => c.Age));
         }
 
         #endregion

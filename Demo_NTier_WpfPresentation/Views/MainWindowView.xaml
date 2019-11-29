@@ -123,12 +123,16 @@
                             Margin="20,0,0,0"
                             Content="Last Name"
                             Style="{StaticResource RadioButtonStyle}"
+                            Command="{Binding Path=SortCharacterListCommand}"
+                            CommandParameter="LastName"
                             IsChecked="True"/>
                         <RadioButton 
                             Name="RadioButton_AgeSort"
                             Margin="20,0,0,0"
                             Content="Age"
-                            Style="{StaticResource RadioButtonStyle}"/>
+                            Style="{StaticResource RadioButtonStyle}"
+                            Command="{Binding Path=SortListByAgeCommand}"
+                            CommandParameter="{Binding Path=SortType}"/>
                     </StackPanel>
                 </Grid>
 
@@ -159,19 +163,19 @@
                                         Orientation="Vertical">
                                         <StackPanel
                                             Orientation="Horizontal">
-                                                <Label
+                                            <Label
                                                 Content="{Binding FullName}"
                                                 Width="120"
                                                 Style="{StaticResource MasterLabelTextStyle}"/>
-                                                <Label
+                                            <Label
                                                 Content="{Binding Age }"
                                                 Padding="0,5"
                                                 Style="{StaticResource MasterLabelTextStyle}"/>
-                                                <Label
+                                            <Label
                                                 Content=" yrs"
                                                 Padding="0,5"
                                                 Style="{StaticResource MasterLabelTextStyle}"/>
-                                            </StackPanel>
+                                        </StackPanel>
                                         <StackPanel
                                             Orientation="Horizontal">
                                             <Button 
@@ -194,7 +198,7 @@
                                                         Content="Delete"
                                                         Style="{StaticResource ButtonStyleSmall}"
                                                         Command="{Binding Path=DataContext.DeleteCharacterCommand, ElementName=ListWindow}" />
-                                                <Button 
+                                            <Button 
                                                         x:Name="Button_Edit" 
                                                         Width="40"
                                                         Height="20"

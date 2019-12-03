@@ -25,11 +25,12 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             DELETE
         }
 
+
         #region COMMANDS
 
         public ICommand SortListByAgeCommand
         {
-            get { return new DelegateCommand(OnSortListByAge); }
+            get { return new RelayCommand(new Action<object>(OnSortCharacterList)); }
         }
 
         public ICommand SortCharacterListCommand
@@ -39,37 +40,37 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
         public ICommand DeleteCharacterCommand
         {
-            get { return new DelegateCommand(OnDeleteCharacter); }
+            get { return new RelayCommand(OnDeleteCharacter); }
         }
 
         public ICommand EditCharacterCommand
         {
-            get { return new DelegateCommand(OnEditCharacter); }
+            get { return new RelayCommand(OnEditCharacter); }
         }
 
         public ICommand SaveCharacterCommand
         {
-            get { return new DelegateCommand(OnSaveCharacter); }
+            get { return new RelayCommand(OnSaveCharacter); }
         }
 
         public ICommand AddCharacterCommand
         {
-            get { return new DelegateCommand(OnAddCharacter); }
+            get { return new RelayCommand(OnAddCharacter); }
         }
 
         public ICommand CancelCharacterCommand
         {
-            get { return new DelegateCommand(OnCancelCharacter); }
+            get { return new RelayCommand(OnCancelCharacter); }
         }
 
         public ICommand ViewCharacterCommand
         {
-            get { return new DelegateCommand(OnViewCharacter); }
+            get { return new RelayCommand(OnViewCharacter); }
         }
 
         public ICommand QuitApplicationCommand
         {
-            get { return new DelegateCommand(OnQuitApplication); }
+            get { return new RelayCommand(OnQuitApplication); }
         }
 
 
@@ -338,16 +339,20 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         private void OnSortCharacterList(object obj)
         {
             string sortType = obj.ToString();
-            switch (_sortType)
+            switch (sortType)
             {
                 case "Age":
+                    Characters = new ObservableCollection<FlintstoneCharacter>(Characters.OrderBy(c => c.Age));
+                    break;
 
+                case "LastName":
+                    Characters = new ObservableCollection<FlintstoneCharacter>(Characters.OrderBy(c => c.LastName));
                     break;
 
                 default:
                     break;
             }
-            Characters = new ObservableCollection<FlintstoneCharacter>(Characters.OrderBy(c => c.Age));
+
         }
 
         #endregion

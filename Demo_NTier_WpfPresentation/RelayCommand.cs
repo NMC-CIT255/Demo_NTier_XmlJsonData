@@ -9,9 +9,16 @@ namespace Demo_NTier_WpfPresentation
 {
     class RelayCommand : ICommand
     {
-        private Action<object> _action;
+        private Action<object> _actionP1;
+
+        private Action _action;
 
         public RelayCommand(Action<object> action)
+        {
+            _actionP1 = action;
+        }
+
+        public RelayCommand(Action action)
         {
             _action = action;
         }
@@ -29,7 +36,11 @@ namespace Demo_NTier_WpfPresentation
         {
             if (parameter != null)
             {
-                _action(parameter);
+                _actionP1(parameter);
+            }
+            else
+            {
+                _action();
             }
         }
 

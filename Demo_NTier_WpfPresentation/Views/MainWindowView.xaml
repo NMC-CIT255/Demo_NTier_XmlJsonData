@@ -131,8 +131,8 @@
                             Margin="20,0,0,0"
                             Content="Age"
                             Style="{StaticResource RadioButtonStyle}"
-                            Command="{Binding Path=SortListByAgeCommand}"
-                            CommandParameter="{Binding Path=SortType}"/>
+                            Command="{Binding Path=SortCharacterListCommand}"
+                            CommandParameter="Age"/>
                     </StackPanel>
                 </Grid>
 

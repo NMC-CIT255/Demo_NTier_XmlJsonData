@@ -35,7 +35,17 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
         public ICommand SearchCharactersListCommand
         {
-            get { return new RelayCommand(new Action<object>(OnSearchCharactersList)); }
+            get { return new RelayCommand(OnSearchCharactersList); }
+        }
+
+        public ICommand AgeFilterCharactersListCommand
+        {
+            get { return new RelayCommand(OnAgeFilterCharactersList); }
+        }
+
+        public ICommand ResetCharactersListCommand
+        {
+            get { return new RelayCommand(OnResetCharactersList); }
         }
 
         public ICommand DeleteCharacterCommand
@@ -93,6 +103,10 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         private bool _showAddButton = true;
 
         private string _sortType;
+        private string _searhText;
+        private string _minAgeText;
+        private string _maxAgeText;
+
 
         #endregion
 
@@ -160,6 +174,38 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         {
             get { return _sortType; }
             set { _sortType = value; }
+        }
+
+        public string SearchText
+        {
+            get { return _searhText; }
+            set
+            {
+                _searhText = value;
+                OnPropertyChanged(nameof(SearchText));
+            }
+        }
+
+
+        public string MaxAgeText
+        {
+            get { return _maxAgeText; }
+            set
+            {
+                _maxAgeText = value;
+                OnPropertyChanged(nameof(MaxAgeText));
+            }
+        }
+
+
+        public string MinAgeText
+        {
+            get { return _minAgeText; }
+            set
+            {
+                _minAgeText = value;
+                OnPropertyChanged(nameof(MinAgeText));
+            }
         }
 
         #endregion
@@ -351,9 +397,13 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
         }
 
-        private void OnSearchCharactersList(object obj)
+        private void OnSearchCharactersList()
         {
-            string searchText = obj.ToString().ToLower();
+            //
+            // reset age filters
+            //
+            MinAgeText = "";
+            MaxAgeText = "";
 
             //
             // reset to full list before search
@@ -361,7 +411,44 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             _characters = new ObservableCollection<FlintstoneCharacter>(_fcBusiness.AllFlintstoneCharacters());
             UpdateImagePath();
 
-            Characters = new ObservableCollection<FlintstoneCharacter>(_characters.Where(c => c.LastName.ToLower().Contains(searchText)));
+            Characters = new ObservableCollection<FlintstoneCharacter>(_characters.Where(c => c.LastName.ToLower().Contains(_searhText)));
+        }
+
+        private void OnAgeFilterCharactersList()
+        {
+            //
+            // reset search text box
+            //
+            SearchText = "";
+
+            if (int.TryParse(MinAgeText, out int minAge) && int.TryParse(MaxAgeText, out int maxAge))
+            {
+                //
+                // reset to full list before search
+                //
+                _characters = new ObservableCollection<FlintstoneCharacter>(_fcBusiness.AllFlintstoneCharacters());
+                UpdateImagePath();
+
+                Characters = new ObservableCollection<FlintstoneCharacter>(_characters.Where(c => c.Age >= minAge && c.Age <= maxAge));
+            }
+        }
+
+        private void OnResetCharactersList()
+        {
+            //
+            // reset search and filter text boxes
+            //
+            SearchText = "";
+            MinAgeText = "";
+            MaxAgeText = "";
+
+            //
+            // reset to full list 
+            //
+            _characters = new ObservableCollection<FlintstoneCharacter>(_fcBusiness.AllFlintstoneCharacters());
+            UpdateImagePath();
+
+            Characters = _characters;
         }
 
         #endregion

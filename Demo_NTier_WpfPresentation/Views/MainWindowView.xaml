@@ -74,7 +74,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <StackPanel 
@@ -87,12 +87,12 @@
                 Content="Troglodyte Talent Agency"/>
             <Button 
                         x:Name="Button_Quit" 
-                        Width="100"
-                        Height="40"
-                        Margin="440,20,0,0"
+                        Width="50"
+                        Height="20"
+                        Margin="440,10,0,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"           
-                        FontSize="20"
+                        FontSize="10"
                         Content="Quit"
                         Style="{StaticResource ButtonStyleLarge}"
                         Command="{Binding Path=QuitApplicationCommand}"/>
@@ -100,7 +100,7 @@
         <Grid 
             Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="60*"/>
                 <!--<ColumnDefinition Width="41*"/>-->
             </Grid.ColumnDefinitions>
@@ -113,15 +113,61 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel
                         Grid.Row="0"
                         Margin="20,0,0,0"
                         Orientation="Horizontal">
+                        <Label Content="Search last Name:" Style="{StaticResource MasterLabelTextStyle}"/>
+                        <TextBox
+                            Name="TextBox_SearchCharacters"
+                            Width="130"
+                            Text="{Binding SearchText}"/>
+                        <Button 
+                            x:Name="Button_Search" 
+                            Width="40"
+                            Height="20"
+                            Margin="3"
+                            VerticalAlignment="Center"  
+                            FontSize="10"
+                            Content="Search"
+                            Style="{StaticResource ButtonStyleSmall}"
+                            Command="{Binding Path=SearchCharactersListCommand}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="20,0,0,0"
+                        Orientation="Horizontal">
+                        <Label Content="Min Age:" Style="{StaticResource MasterLabelTextStyle}"/>
+                        <TextBox
+                            Name="TextBox_MinAge"
+                            Width="40"
+                            Text="{Binding MinAgeText}"/>
+                        <Label Content="Max Age:" Style="{StaticResource MasterLabelTextStyle}"/>
+                        <TextBox
+                            Name="TextBox_MaxAge"
+                            Width="40"
+                            Text="{Binding MaxAgeText}"/>
+                        <Button 
+                            x:Name="Button_AgeFilter" 
+                            Width="40"
+                            Height="20"
+                            Margin="3"
+                            VerticalAlignment="Center"           
+                            FontSize="10"
+                            Content="Filter"
+                            Style="{StaticResource ButtonStyleSmall}"
+                            Command="{Binding Path=AgeFilterCharactersListCommand}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="2"
+                        Margin="20,0,0,0"
+                        Orientation="Horizontal">
                         <Label Content="Sort by:" Style="{StaticResource MasterLabelTextStyle}"/>
                         <RadioButton 
                             Name="RadioButton_LastNameSort"
-                            Margin="20,0,0,0"
+                            Margin="20,5,0,0"
                             Content="Last Name"
                             Style="{StaticResource RadioButtonStyle}"
                             Command="{Binding Path=SortCharactersListCommand}"
@@ -129,32 +175,21 @@
                             IsChecked="True"/>
                         <RadioButton 
                             Name="RadioButton_AgeSort"
-                            Margin="20,0,0,0"
+                            Margin="20,5,0,0"
                             Content="Age"
                             Style="{StaticResource RadioButtonStyle}"
                             Command="{Binding Path=SortCharactersListCommand}"
                             CommandParameter="Age"/>
-                    </StackPanel>
-                    <StackPanel
-                        Grid.Row="1"
-                        Margin="20,0,0,0"
-                        Orientation="Horizontal">
-                        <Label Content="Search for:" Style="{StaticResource MasterLabelTextStyle}"/>
-                        <TextBox
-                            Name="TextBox_SearchCharacters"
-                            Width="130"
-                            />
                         <Button 
-                            x:Name="Button_Search" 
-                            Width="30"
+                            x:Name="Button_ResetList" 
+                            Width="60"
                             Height="20"
-                            Margin="3"
+                            Margin="30,0,0,0"
                             VerticalAlignment="Center"           
                             FontSize="10"
-                            Content="Go"
+                            Content="Reset List"
                             Style="{StaticResource ButtonStyleSmall}"
-                            Command="{Binding Path=SearchCharactersListCommand}" 
-                            CommandParameter="{Binding Text, ElementName=TextBox_SearchCharacters}"/>
+                            Command="{Binding Path=ResetCharactersListCommand}"/>
                     </StackPanel>
                 </Grid>
 

@@ -9,18 +9,18 @@ namespace Demo_NTier_WpfPresentation
 {
     class RelayCommand : ICommand
     {
-        private Action<object> _actionP1;
-
         private Action _action;
 
-        public RelayCommand(Action<object> action)
-        {
-            _actionP1 = action;
-        }
+        private Action<object> _actionP1;
 
         public RelayCommand(Action action)
         {
             _action = action;
+        }
+
+        public RelayCommand(Action<object> action)
+        {
+            _actionP1 = action;
         }
 
         #region ICommand Members

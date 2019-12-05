@@ -70,7 +70,6 @@
     <Compile Include="DataAccessLayer\DataServiceXml.cs" />
     <Compile Include="DataAccessLayer\IDataService.cs" />
     <Compile Include="DataAccessLayer\SeedData.cs" />
-    <Compile Include="DelegateCommand.cs" />
     <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,9 +147,6 @@
     <Resource Include="DataAccessLayer\Images\wilma_flintstone.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="fred_flintstone.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Images\bamm_bamm_rubble.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

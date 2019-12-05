@@ -28,14 +28,14 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
         #region COMMANDS
 
-        public ICommand SortListByAgeCommand
+        public ICommand SortCharactersListCommand
         {
-            get { return new RelayCommand(new Action<object>(OnSortCharacterList)); }
+            get { return new RelayCommand(new Action<object>(OnSortCharactersList)); }
         }
 
-        public ICommand SortCharacterListCommand
+        public ICommand SearchCharactersListCommand
         {
-            get { return new RelayCommand(new Action<object>(OnSortCharacterList)); }
+            get { return new RelayCommand(new Action<object>(OnSearchCharactersList)); }
         }
 
         public ICommand DeleteCharacterCommand
@@ -72,8 +72,6 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         {
             get { return new RelayCommand(OnQuitApplication); }
         }
-
-
 
         #endregion
 
@@ -171,10 +169,8 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         public MainWindowViewModel(FlintstoneCharacterBusiness fcBusiness)
         {
             _fcBusiness = fcBusiness;
-            _characters = new ObservableCollection<FlintstoneCharacter>(fcBusiness.AllFlintstoneCharacters());
+            _characters = new ObservableCollection<FlintstoneCharacter>(_fcBusiness.AllFlintstoneCharacters());
             UpdateImagePath();
-
-            //SortCharacterListCommand = new RelayCommand(new Action<object>(OnSortCharacterList));
         }
 
         #endregion
@@ -336,7 +332,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         }
 
 
-        private void OnSortCharacterList(object obj)
+        private void OnSortCharactersList(object obj)
         {
             string sortType = obj.ToString();
             switch (sortType)
@@ -353,6 +349,19 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                     break;
             }
 
+        }
+
+        private void OnSearchCharactersList(object obj)
+        {
+            string searchText = obj.ToString().ToLower();
+
+            //
+            // reset to full list before search
+            //
+            _characters = new ObservableCollection<FlintstoneCharacter>(_fcBusiness.AllFlintstoneCharacters());
+            UpdateImagePath();
+
+            Characters = new ObservableCollection<FlintstoneCharacter>(_characters.Where(c => c.LastName.ToLower().Contains(searchText)));
         }
 
         #endregion

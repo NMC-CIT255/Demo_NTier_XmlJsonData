@@ -239,36 +239,10 @@
                                         </StackPanel>
                                         <StackPanel
                                             Orientation="Horizontal">
-                                            <Button 
-                                                        x:Name="Button_View" 
-                                                        Width="40"
-                                                        Height="20"
-                                                        Margin="3"
-                                                        VerticalAlignment="Center"           
-                                                        FontSize="10"
-                                                        Content="View"
-                                                        Style="{StaticResource ButtonStyleSmall}"
-                                                        Command="{Binding Path=DataContext.ViewCharacterCommand, ElementName=ListWindow}" />
-                                            <Button 
-                                                        x:Name="Button_Delete" 
-                                                        Width="40"
-                                                        Height="20"
-                                                        Margin="3"
-                                                        VerticalAlignment="Center"           
-                                                        FontSize="10"
-                                                        Content="Delete"
-                                                        Style="{StaticResource ButtonStyleSmall}"
-                                                        Command="{Binding Path=DataContext.DeleteCharacterCommand, ElementName=ListWindow}" />
-                                            <Button 
-                                                        x:Name="Button_Edit" 
-                                                        Width="40"
-                                                        Height="20"
-                                                        Margin="3"
-                                                        VerticalAlignment="Center"           
-                                                        FontSize="10"
-                                                        Content="Edit"
-                                                        Style="{StaticResource ButtonStyleSmall}"
-                                                        Command="{Binding Path=DataContext.EditCharacterCommand, ElementName=ListWindow}" />
+                                            <Label
+                                                Content="{Binding Gender}"
+                                                Padding="120,0,0,0"
+                                                Style="{StaticResource MasterLabelTextStyle}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -337,17 +311,6 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
                     <Button 
-                        x:Name="Button_Add" 
-                        Width="100"
-                        Height="40"
-                        Margin="10,10,10,10"
-                        VerticalAlignment="Center"           
-                        FontSize="20"
-                        Content="Add"
-                        Style="{StaticResource ButtonStyleLarge}"
-                        Visibility="{Binding ShowAddButton, Converter={StaticResource myBoolToVisibilityConverter}}"
-                        Command="{Binding Path=AddCharacterCommand}"/>
-                    <Button 
                         x:Name="Button_Save" 
                         Width="100"
                         Height="40"
@@ -371,36 +334,40 @@
                         Command="{Binding Path=CancelCharacterCommand}"/>
                 </StackPanel>
                 <StackPanel
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
                     <Button 
-                        x:Name="Button_View" 
-                        Width="40"
-                        Height="20"
-                        Margin="3"
+                        x:Name="Button_Add" 
+                        Width="100"
+                        Height="40"
+                        Margin="10,10,10,10"
                         VerticalAlignment="Center"           
-                        FontSize="10"
-                        Content="View"
-                        Style="{StaticResource ButtonStyleSmall}"
-                        Command="{Binding Path=DataContext.ViewCharacterCommand, ElementName=ListWindow}" />
+                        FontSize="20"
+                        Content="Add"
+                        Style="{StaticResource ButtonStyleLarge}"
+                        Visibility="{Binding ShowAddButton, Converter={StaticResource myBoolToVisibilityConverter}}"
+                        Command="{Binding Path=AddCharacterCommand}"/>
                     <Button 
                         x:Name="Button_Delete" 
-                        Width="40"
-                        Height="20"
-                        Margin="3"
+                        Width="100"
+                        Height="40"
+                        Margin="10,10,10,10"
                         VerticalAlignment="Center"           
-                        FontSize="10"
+                        FontSize="20"
                         Content="Delete"
-                        Style="{StaticResource ButtonStyleSmall}"
+                        Style="{StaticResource ButtonStyleLarge}"
+                        Visibility="{Binding ShowAddButton, Converter={StaticResource myBoolToVisibilityConverter}}"
                         Command="{Binding Path=DataContext.DeleteCharacterCommand, ElementName=ListWindow}" />
                     <Button 
                         x:Name="Button_Edit" 
-                        Width="40"
-                        Height="20"
-                        Margin="3"
+                        Width="100"
+                        Height="40"
+                        Margin="10,10,10,10"
                         VerticalAlignment="Center"           
-                        FontSize="10"
+                        FontSize="20"
                         Content="Edit"
-                        Style="{StaticResource ButtonStyleSmall}"
+                        Style="{StaticResource ButtonStyleLarge}"
+                        Visibility="{Binding ShowAddButton, Converter={StaticResource myBoolToVisibilityConverter}}"                        
                         Command="{Binding Path=DataContext.EditCharacterCommand, ElementName=ListWindow}" />
                 </StackPanel>
             </StackPanel>

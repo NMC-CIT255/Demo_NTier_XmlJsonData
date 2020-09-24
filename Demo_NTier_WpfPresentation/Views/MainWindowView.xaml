@@ -49,6 +49,11 @@
         <Style x:Key="ButtonStyleLarge" TargetType="Button">
             <Setter Property="Background" Value="DarkGoldenrod"/>
             <Setter Property="Foreground" Value="AntiqueWhite"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="Red"/>
@@ -312,22 +317,12 @@
                     HorizontalAlignment="Right">
                     <Button 
                         x:Name="Button_Save" 
-                        Width="100"
-                        Height="40"
-                        Margin="10,10,10,10"
-                        VerticalAlignment="Center"           
-                        FontSize="20"
                         Content="Save"
                         Style="{StaticResource ButtonStyleLarge}"
                         Visibility="{Binding IsEditingAdding, Converter={StaticResource myBoolToVisibilityConverter}}"
                         Command="{Binding Path=SaveCharacterCommand}"/>
                     <Button 
                         x:Name="Button_Cancel" 
-                        Width="100"
-                        Height="40"
-                        Margin="10,10,10,10"
-                        VerticalAlignment="Center"           
-                        FontSize="20"
                         Content="Cancel"
                         Style="{StaticResource ButtonStyleLarge}"
                         Visibility="{Binding IsEditingAdding, Converter={StaticResource myBoolToVisibilityConverter}}"
@@ -338,36 +333,21 @@
                     HorizontalAlignment="Center">
                     <Button 
                         x:Name="Button_Add" 
-                        Width="100"
-                        Height="40"
-                        Margin="10,10,10,10"
-                        VerticalAlignment="Center"           
-                        FontSize="20"
                         Content="Add"
                         Style="{StaticResource ButtonStyleLarge}"
-                        Visibility="{Binding ShowAddButton, Converter={StaticResource myBoolToVisibilityConverter}}"
+                        Visibility="{Binding ShowAddEditDeleteButtons, Converter={StaticResource myBoolToVisibilityConverter}}"
                         Command="{Binding Path=AddCharacterCommand}"/>
                     <Button 
                         x:Name="Button_Delete" 
-                        Width="100"
-                        Height="40"
-                        Margin="10,10,10,10"
-                        VerticalAlignment="Center"           
-                        FontSize="20"
                         Content="Delete"
                         Style="{StaticResource ButtonStyleLarge}"
-                        Visibility="{Binding ShowAddButton, Converter={StaticResource myBoolToVisibilityConverter}}"
+                        Visibility="{Binding ShowAddEditDeleteButtons, Converter={StaticResource myBoolToVisibilityConverter}}"
                         Command="{Binding Path=DataContext.DeleteCharacterCommand, ElementName=ListWindow}" />
                     <Button 
                         x:Name="Button_Edit" 
-                        Width="100"
-                        Height="40"
-                        Margin="10,10,10,10"
-                        VerticalAlignment="Center"           
-                        FontSize="20"
                         Content="Edit"
                         Style="{StaticResource ButtonStyleLarge}"
-                        Visibility="{Binding ShowAddButton, Converter={StaticResource myBoolToVisibilityConverter}}"                        
+                        Visibility="{Binding ShowAddEditDeleteButtons, Converter={StaticResource myBoolToVisibilityConverter}}"                        
                         Command="{Binding Path=DataContext.EditCharacterCommand, ElementName=ListWindow}" />
                 </StackPanel>
             </StackPanel>

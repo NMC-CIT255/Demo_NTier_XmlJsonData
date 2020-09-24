@@ -100,7 +100,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         private OperationStatus _operationStatus = OperationStatus.NONE;
 
         private bool _isEditingAdding = false;
-        private bool _showAddButton = true;
+        private bool _showAddEditDeleteButtons = true;
 
         private string _sortType;
         private string _searhText;
@@ -127,25 +127,19 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             get { return _detailedViewCharacter; }
             set
             {
-                if (_detailedViewCharacter == value)
+                if (value != null)
                 {
-                    return;
+                    _detailedViewCharacter = value;
+                    OnPropertyChanged("DetailedViewCharacter");
                 }
-                _detailedViewCharacter = value;
-                OnPropertyChanged("DetailedViewCharacter");
             }
         }
-
 
         public FlintstoneCharacter SelectedCharacter
         {
             get { return _selectedCharacter; }
             set
             {
-                if (_selectedCharacter == value)
-                {
-                    return;
-                }
                 if (value != null)
                 {
                     _selectedCharacter = value;
@@ -165,13 +159,13 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             }
         }
 
-        public bool ShowAddButton
+        public bool ShowAddEditDeleteButtons
         {
-            get { return _showAddButton; }
+            get { return _showAddEditDeleteButtons; }
             set
             {
-                _showAddButton = value;
-                OnPropertyChanged(nameof(ShowAddButton));
+                _showAddEditDeleteButtons = value;
+                OnPropertyChanged(nameof(ShowAddEditDeleteButtons));
             }
         }
 
@@ -222,6 +216,12 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             _fcBusiness = fcBusiness;
             _characters = new ObservableCollection<FlintstoneCharacter>(_fcBusiness.AllFlintstoneCharacters());
             UpdateImagePath();
+
+            //
+            // set SelectedCharacter property to first in list
+            //
+            _selectedCharacter = _characters[0];
+            UpdateDetailedViewCharacterToSelected();
         }
 
         #endregion
@@ -258,8 +258,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                     //
                     // set SelectedCharacter property to first in list
                     //
-                    _selectedCharacter = _characters[0];
-                    UpdateDetailedViewCharacterToSelected();
+                    SelectedCharacter = _characters[0];
                 }
             }
         }
@@ -270,8 +269,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             {
                 _operationStatus = OperationStatus.EDIT;
                 IsEditingAdding = true;
-                ShowAddButton = false;
-                UpdateDetailedViewCharacterToSelected();
+                ShowAddEditDeleteButtons = false;
             }
         }
 
@@ -288,7 +286,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         {
             ResetDetailedViewCharacter();
             IsEditingAdding = true;
-            ShowAddButton = false;
+            ShowAddEditDeleteButtons = false;
             _operationStatus = OperationStatus.ADD;
         }
 
@@ -308,8 +306,14 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                         // add character to list - update view
                         //
                         _characters.Add(DetailedViewCharacter);
+
+                        //
+                        // set SelectedCharacter property to the new character
+                        //
+                        SelectedCharacter = DetailedViewCharacter;
                     }
                     break;
+
                 case OperationStatus.EDIT:
                     FlintstoneCharacter characterToUpdate = _characters.FirstOrDefault(c => c.Id == SelectedCharacter.Id);
 
@@ -326,55 +330,54 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                         // update character in list - update view
                         _characters.Remove(characterToUpdate);
                         _characters.Add(updatedCharacter);
+
+                        //
+                        // set SelectedCharacter property to updated character
+                        //
+                        SelectedCharacter = updatedCharacter;
                     }
                     break;
+
                 default:
+
                     break;
             }
 
-            ResetDetailedViewCharacter();
             IsEditingAdding = false;
-            ShowAddButton = true;
+            ShowAddEditDeleteButtons = true;
             _operationStatus = OperationStatus.NONE;
         }
 
         private void OnCancelCharacter()
         {
-            ResetDetailedViewCharacter();
+            if (_operationStatus == OperationStatus.ADD)
+            {
+                SelectedCharacter = _characters[0];
+            }
             _operationStatus = OperationStatus.NONE;
             IsEditingAdding = false;
-            ShowAddButton = true;
+            ShowAddEditDeleteButtons = true;
         }
 
         private void UpdateDetailedViewCharacterToSelected()
         {
-            _detailedViewCharacter = new FlintstoneCharacter();
-            _detailedViewCharacter.Id = _selectedCharacter.Id;
-            _detailedViewCharacter.FirstName = _selectedCharacter.FirstName;
-            _detailedViewCharacter.LastName = _selectedCharacter.LastName;
-            _detailedViewCharacter.Age = _selectedCharacter.Age;
-            _detailedViewCharacter.Gender = _selectedCharacter.Gender;
-            _detailedViewCharacter.AverageAnnualGross = _selectedCharacter.AverageAnnualGross;
-            _detailedViewCharacter.HireDate = _selectedCharacter.HireDate;
-            _detailedViewCharacter.Description = _selectedCharacter.Description;
-            _detailedViewCharacter.ImageFileName = _selectedCharacter.ImageFileName;
-            _detailedViewCharacter.ImageFilePath = _selectedCharacter.ImageFilePath;
-            OnPropertyChanged("DetailedViewCharacter");
+            FlintstoneCharacter tempCharacter = new FlintstoneCharacter();
+            tempCharacter.Id = _selectedCharacter.Id;
+            tempCharacter.FirstName = _selectedCharacter.FirstName;
+            tempCharacter.LastName = _selectedCharacter.LastName;
+            tempCharacter.Age = _selectedCharacter.Age;
+            tempCharacter.Gender = _selectedCharacter.Gender;
+            tempCharacter.AverageAnnualGross = _selectedCharacter.AverageAnnualGross;
+            tempCharacter.HireDate = _selectedCharacter.HireDate;
+            tempCharacter.Description = _selectedCharacter.Description;
+            tempCharacter.ImageFileName = _selectedCharacter.ImageFileName;
+            tempCharacter.ImageFilePath = _selectedCharacter.ImageFilePath;
+            DetailedViewCharacter = tempCharacter;
         }
 
         private void ResetDetailedViewCharacter()
         {
-            _detailedViewCharacter = new FlintstoneCharacter();
-            _detailedViewCharacter.FirstName = "";
-            _detailedViewCharacter.LastName = "";
-            _detailedViewCharacter.Age = 0;
-            _detailedViewCharacter.Gender = FlintstoneCharacter.GenderType.None;
-            _detailedViewCharacter.AverageAnnualGross = 0;
-            _detailedViewCharacter.HireDate = DateTime.Today;
-            _detailedViewCharacter.Description = "";
-            _detailedViewCharacter.ImageFileName = "";
-            _detailedViewCharacter.ImageFilePath = "";
-            OnPropertyChanged("DetailedViewCharacter");
+            DetailedViewCharacter = new FlintstoneCharacter();
         }
 
         private void OnQuitApplication()
@@ -389,7 +392,6 @@ namespace Demo_NTier_WpfPresentation.ViewModels
         {
             Characters = new ObservableCollection<FlintstoneCharacter>(_characters.OrderBy(c => c.Age));
         }
-
 
         private void OnSortCharactersList(object obj)
         {

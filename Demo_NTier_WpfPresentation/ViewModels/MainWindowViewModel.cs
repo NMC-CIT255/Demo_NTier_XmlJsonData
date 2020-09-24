@@ -136,6 +136,7 @@ namespace Demo_NTier_WpfPresentation.ViewModels
             }
         }
 
+
         public FlintstoneCharacter SelectedCharacter
         {
             get { return _selectedCharacter; }
@@ -145,8 +146,12 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                 {
                     return;
                 }
-                _selectedCharacter = value;
-                OnPropertyChanged("SelectedCharacter");
+                if (value != null)
+                {
+                    _selectedCharacter = value;
+                    OnPropertyChanged("SelectedCharacter");
+                    UpdateDetailedViewCharacterToSelected();
+                }
             }
         }
 
@@ -249,6 +254,12 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                     // remove character from list - update view
                     //
                     _characters.Remove(_selectedCharacter);
+
+                    //
+                    // set SelectedCharacter property to first in list
+                    //
+                    _selectedCharacter = _characters[0];
+                    UpdateDetailedViewCharacterToSelected();
                 }
             }
         }
@@ -304,15 +315,17 @@ namespace Demo_NTier_WpfPresentation.ViewModels
 
                     if (characterToUpdate != null)
                     {
+                        FlintstoneCharacter updatedCharacter = DetailedViewCharacter;
+
                         //
                         // update character in persistence
                         //
-                        _fcBusiness.UpdateFlintstoneCharacter(DetailedViewCharacter);
+                        _fcBusiness.UpdateFlintstoneCharacter(updatedCharacter);
 
                         //
                         // update character in list - update view
                         _characters.Remove(characterToUpdate);
-                        _characters.Add(DetailedViewCharacter);
+                        _characters.Add(updatedCharacter);
                     }
                     break;
                 default:
@@ -394,7 +407,6 @@ namespace Demo_NTier_WpfPresentation.ViewModels
                 default:
                     break;
             }
-
         }
 
         private void OnSearchCharactersList()

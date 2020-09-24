@@ -120,9 +120,9 @@
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="DataAccessLayer\DataXml\FlintstoneCharacters.xml">
+    <None Include="DataAccessLayer\DataXml\FlintstoneCharacters.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
     <Resource Include="DataAccessLayer\Images\bamm_bamm_rubble.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

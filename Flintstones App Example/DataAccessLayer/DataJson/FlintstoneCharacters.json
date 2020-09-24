@@ -1,0 +1,118 @@
+[
+  {
+    "Id": 2,
+    "FirstName": "Wilma",
+    "LastName": "Flintstone",
+    "Age": 28,
+    "Gender": 2,
+    "ImageFileName": "wilma_flintstone.jpg",
+    "Description": "Wilma is Fred's wife. She is more intelligent and level-headed than her husband, though she often has a habit of spending money recklessly (with Betty and her catchphrase being \"Da-da-da duh da-da CHARGE IT!!\"). She's often a foil to Fred's poor behavior.",
+    "HireDate": "0001-01-01T00:00:00",
+    "AverageAnnualGross": 60000.0,
+    "FullName": "Wilma Flintstone",
+    "ImageFilePath": null,
+    "GroceryList": null
+  },
+  {
+    "Id": 3,
+    "FirstName": "Pebbles",
+    "LastName": "Flintstone",
+    "Age": 1,
+    "Gender": 2,
+    "ImageFileName": "pebbles_flintstone.jpg",
+    "Description": "Pebbles is the Flintstones' infant daughter, who is born near the end of the third season.",
+    "HireDate": "0001-01-01T00:00:00",
+    "AverageAnnualGross": 5000.0,
+    "FullName": "Pebbles Flintstone",
+    "ImageFilePath": null,
+    "GroceryList": [
+      {
+        "Name": "Bread",
+        "Quantity": 1
+      },
+      {
+        "Name": "Milk",
+        "Quantity": 2
+      },
+      {
+        "Name": "Butter",
+        "Quantity": 1
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "FirstName": "Barney",
+    "LastName": "Rubble",
+    "Age": 27,
+    "Gender": 1,
+    "ImageFileName": "barney_rubble.jpg",
+    "Description": "Barney is the secondary main character and Fred's best friend and next-door neighbor. His occupation is, for the most part of the series, unknown, though later series depict him working in the same quarry as Fred. He shares many of Fred's interests such as bowling and golf, and is also a member of the \"Loyal Order of Water Buffaloes\". Though Fred and Barney frequently get into feuds with one another (usually due to Fred's short temper), their deep fraternal bond remains evident.",
+    "HireDate": "0001-01-01T00:00:00",
+    "AverageAnnualGross": 30000.0,
+    "FullName": "Barney Rubble",
+    "ImageFilePath": null,
+    "GroceryList": null
+  },
+  {
+    "Id": 5,
+    "FirstName": "Betty",
+    "LastName": "Rubble",
+    "Age": 26,
+    "Gender": 1,
+    "ImageFileName": "betty_rubble.gif",
+    "Description": "Betty is Barney's wife and Wilma's best friend. Like Wilma, she, too, has a habit of carelessly spending money.",
+    "HireDate": "0001-01-01T00:00:00",
+    "AverageAnnualGross": 30000.0,
+    "FullName": "Betty Rubble",
+    "ImageFilePath": null,
+    "GroceryList": null
+  },
+  {
+    "Id": 6,
+    "FirstName": "Bamm-Bamm",
+    "LastName": "Rubble",
+    "Age": 2,
+    "Gender": 1,
+    "ImageFileName": "bamm_bamm_rubble.gif",
+    "Description": "Bamm-Bamm is the Rubbles' abnormally strong adopted son, whom they adopt during the fourth season.",
+    "HireDate": "0001-01-01T00:00:00",
+    "AverageAnnualGross": 5000.0,
+    "FullName": "Bamm-Bamm Rubble",
+    "ImageFilePath": null,
+    "GroceryList": null
+  },
+  {
+    "Id": 7,
+    "FirstName": "Dino",
+    "LastName": "",
+    "Age": 7,
+    "Gender": 2,
+    "ImageFileName": "dino.jpg",
+    "Description": "Dino, a prosauropod dinosaur, is the Flintstones' pet that barks and generally acts like a dog. A running gag in the series involves Dino knocking down Fred out of excitement and licking him repeatedly. Though this irritates Fred a lot, he generally likes Dino very much.",
+    "HireDate": "0001-01-01T00:00:00",
+    "AverageAnnualGross": 1000000.0,
+    "FullName": "Dino ",
+    "ImageFilePath": null,
+    "GroceryList": [
+      {
+        "Name": "T-Rex Ribs",
+        "Quantity": 11
+      }
+    ]
+  },
+  {
+    "Id": 1,
+    "FirstName": "Fred",
+    "LastName": "Flintstone",
+    "Age": 282,
+    "Gender": 1,
+    "ImageFileName": "fred_flintstone.jpg",
+    "Description": "Fred is the main character of the series. He's an accident-prone bronto-crane operator at the Slate Rock and Gravel Company and the head of the Flintstone household. He is quick to anger (usually over trivial matters), but is nonetheless a very loving husband and father. He's also good at bowling and is a member of the fictional \"Loyal Order of Water Buffaloes\" (Lodge No. 26), a men-only club paralleling real-life fraternities such as the Loyal Order of Moose.",
+    "HireDate": "0001-01-01T00:00:00",
+    "AverageAnnualGross": 45000.0,
+    "FullName": "Fred Flintstone",
+    "ImageFilePath": "\\DataAccessLayer\\Images\\fred_flintstone.jpg",
+    "GroceryList": null
+  }
+]

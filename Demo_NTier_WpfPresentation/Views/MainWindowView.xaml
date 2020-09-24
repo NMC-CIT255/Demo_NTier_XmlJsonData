@@ -200,15 +200,15 @@
                         <ColumnDefinition Width="47*"/>
                     </Grid.ColumnDefinitions>
                     <ListBox 
-                    x:Name="_master"
-                    Grid.Column="0"
-                    Margin="10,10,10,10"
-                    BorderThickness="0"
-                    Background="AntiqueWhite"
-                    ItemsSource="{Binding Characters}"
-                    SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}"
-                    IsSynchronizedWithCurrentItem="true"
-                    ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                        x:Name="_master"
+                        Grid.Column="0"
+                        Margin="10,10,10,10"
+                        BorderThickness="0"
+                        Background="AntiqueWhite"
+                        ItemsSource="{Binding Characters}"
+                        SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}"
+                        IsSynchronizedWithCurrentItem="true"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel
@@ -369,6 +369,39 @@
                         Style="{StaticResource ButtonStyleLarge}"
                         Visibility="{Binding IsEditingAdding, Converter={StaticResource myBoolToVisibilityConverter}}"
                         Command="{Binding Path=CancelCharacterCommand}"/>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Horizontal">
+                    <Button 
+                        x:Name="Button_View" 
+                        Width="40"
+                        Height="20"
+                        Margin="3"
+                        VerticalAlignment="Center"           
+                        FontSize="10"
+                        Content="View"
+                        Style="{StaticResource ButtonStyleSmall}"
+                        Command="{Binding Path=DataContext.ViewCharacterCommand, ElementName=ListWindow}" />
+                    <Button 
+                        x:Name="Button_Delete" 
+                        Width="40"
+                        Height="20"
+                        Margin="3"
+                        VerticalAlignment="Center"           
+                        FontSize="10"
+                        Content="Delete"
+                        Style="{StaticResource ButtonStyleSmall}"
+                        Command="{Binding Path=DataContext.DeleteCharacterCommand, ElementName=ListWindow}" />
+                    <Button 
+                        x:Name="Button_Edit" 
+                        Width="40"
+                        Height="20"
+                        Margin="3"
+                        VerticalAlignment="Center"           
+                        FontSize="10"
+                        Content="Edit"
+                        Style="{StaticResource ButtonStyleSmall}"
+                        Command="{Binding Path=DataContext.EditCharacterCommand, ElementName=ListWindow}" />
                 </StackPanel>
             </StackPanel>
 
